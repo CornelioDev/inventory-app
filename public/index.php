@@ -7,8 +7,13 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use App\Router;
 use App\Controller\HomeController;
 use App\Controller\ArticleController;
+use Dotenv\Dotenv;
 
+// Load .env
+$dotenv = Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
 
+// Routing
 $router = new Router();
 
 $router->addRoute('GET', '/', function(){
@@ -21,12 +26,13 @@ $router->addRoute('GET', '/article/new', function(){
     $articleController->render();
 });
 
+$router->addRoute('POST', '/article/new', function(){
+    $articleController = new ArticleController();
+    $articleController->create();
+});
 
-// Manejar la solicitud actual
+// Request management
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-// echo "Request Method: $requestMethod <br>";
-// echo "Request Path: $requestPath <br>";
 
 $router->handleRequest($requestMethod, $requestPath);

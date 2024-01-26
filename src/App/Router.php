@@ -15,7 +15,6 @@ class Router
             'path' => $path,
             'handler' => $handler,
         ];
-        echo 'Route added' . PHP_EOL;
     }
 
     public function handleRequest(string $method, string $path): void

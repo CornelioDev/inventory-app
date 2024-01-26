@@ -13,5 +13,7 @@
             "email": "jose@corneliodev.com"
         }
     ],
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
 }

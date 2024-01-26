@@ -1,1 +1,0 @@
-<h1>Create new article</h1>
