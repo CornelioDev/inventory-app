@@ -21,9 +21,14 @@ $router->addRoute('GET', '/', function(){
     $homeController->render();
 });
 
+$router->addRoute('GET', '/articles', function(){
+    $articleController = new ArticleController();
+    $articleController->showAll();
+});
+
 $router->addRoute('GET', '/article/new', function(){
     $articleController = new ArticleController();
-    $articleController->render();
+    $articleController->newArticleForm();
 });
 
 $router->addRoute('POST', '/article/new', function(){

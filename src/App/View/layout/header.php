@@ -12,13 +12,27 @@
 <body>
     <div class="navbar bg-base-100">
         <div class="flex-1">
-            <a class="btn btn-ghost text-xl">Inventory App</a>
+            <a class="btn btn-ghost text-xl" href="/">Inventory App</a>
         </div>
         <div class="flex-none gap-2">
-            <div class="form-control">
-                <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+            <div class="flex-none">
+                <ul class="menu menu-horizontal px-1">
+                    <li><a href="/articles">All Articles</a></li>
+                    <li><a href="/article/new">New Article</a></li>
+                    <!-- <li>
+                        <details>
+                            <summary>
+                                Parent
+                            </summary>
+                            <ul class="p-2 bg-base-100 rounded-t-none">
+                                <li><a>Link 1</a></li>
+                                <li><a>Link 2</a></li>
+                            </ul>
+                        </details>
+                    </li> -->
+                </ul>
             </div>
-            <div class="dropdown dropdown-end">
+            <!-- <div class="dropdown dropdown-end">
                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                     <div class="w-10 rounded-full">
                         <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
@@ -34,6 +48,6 @@
                     <li><a>Settings</a></li>
                     <li><a>Logout</a></li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </div>
