@@ -2,9 +2,17 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use App\Model\Article;
 
 class ArticleController extends BaseController
 {
+    private Article $articleModel;
+
+    public function __construct()
+    {
+        $this->articleModel = new Article();
+    }
+
     public function newArticleForm()
     {
         $this->renderTemplate('new_article');
@@ -12,11 +20,7 @@ class ArticleController extends BaseController
 
     public function showAll()
     {   
-        $query = 'SELECT * FROM articles';
-        $statement = $this->connection->prepare($query);
-        $statement->execute();
-        $articles = $statement->fetchAll(\PDO::FETCH_ASSOC);
-
+        $articles = $this->articleModel->getAll();
         $this->renderTemplate('show_all_articles', ['articles' => $articles]);
     }
 
@@ -25,33 +29,18 @@ class ArticleController extends BaseController
         if($_SERVER['REQUEST_METHOD'] === 'POST')
         {
             // Capture form data
-            $name = $_POST['name'];
-            $description = $_POST['description'];
-            $price = $_POST['price']; 
+            $name = htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8');
+            $description = htmlspecialchars($_POST['description'], ENT_QUOTES, 'UTF-8');
+            $price = filter_var($_POST['price'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
-            $query = 'INSERT INTO articles (name, description, price) VALUES (:name, :description, :price)';
-            
-            $statement = $this->connection->prepare($query);
-            
-            $statement->bindParam(':name', $name);
-            $statement->bindParam(':description', $description);
-            $statement->bindParam(':price', $price);
+            $price = floatval($price);
 
-            if ($statement->execute()) {
+            if ($this->articleModel->create($name, $description, $price)) {
                 header('Location: /articles');
+                //var_dump($_POST);
             } else {
                 echo '<script>alert("Error: Cannot create new article");</script>';
             }
         }
-    }
-
-    public function edit(string $id): void
-    {
-        $article = $this->getArticleById($id);
-    }
-
-    public function getArticleById(string $id)
-    {
-
     }
 }
