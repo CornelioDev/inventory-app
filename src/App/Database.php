@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App;
 
-use \PDO;
-
 class Database
 {
     private string $host;
@@ -20,7 +18,6 @@ class Database
         $this->db_name = $_ENV['DB_NAME'];
         $this->username = $_ENV['DB_USER'];
         $this->password = $_ENV['DB_PASS'];
-        //$this->connection = $this->getConnection();
     }
 
     public function getConnection(): \PDO

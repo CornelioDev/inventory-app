@@ -23,17 +23,30 @@ class Article extends BaseModel
         $this->createdAt = date('Y-m-d H:i:s');
     }
 
-    public function save(string $name, string $description, float $price): void
+    public function create(string $name, string $description, float $price): bool
     {
-        $query = 'INSERT INTO articles (name, description, price) VALUES (:name, :description, :price)';
-        $bindings = [':name' => $name, ':description' => $description, ':price' => $price];
-        $this->executeQuery($query, $bindings);
+        $query = 'INSERT INTO articles (name, description, price) 
+        VALUES (:name, :description, :price)';
+        
+        $bindings = [
+            ':name' => $name, 
+            ':description' => $description, 
+            ':price' => $price
+        ];
+        
+        $statement = $this->executeQuery($query, $bindings);
+        return $statement->rowCount() > 0;
     }
 
     public function update(int $id, string $name, string $description, float $price): void
     {
         $query = 'UPDATE articles SET name = :name, description = :description, price = :price WHERE id = :id';
-        $bindings = [':id' => $id, ':name' => $name, ':description' => $description, ':price' => $price];
+        $bindings = [
+            ':id' => $id, 
+            ':name' => $name, 
+            ':description' => $description, 
+            ':price' => $price
+        ];
         $this->executeQuery($query, $bindings);
     }
 
@@ -50,14 +63,6 @@ class Article extends BaseModel
         $query = 'SELECT * FROM articles';
         $statement = $this->executeQuery($query);
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
-    }
-
-    public function create(string $name, string $description, float $price): bool
-    {
-        $query = 'INSERT INTO articles (name, description, price) VALUES (:name, :description, :price)';
-        $bindings = [':name' => $name, ':description' => $description, ':price' => $price];
-        $statement = $this->executeQuery($query, $bindings);
-        return $statement->rowCount() > 0;
     }
 
     // Getters

@@ -27,7 +27,6 @@ class Router
             }
         }
 
-        // Ruta no encontrada
         http_response_code(404);
         echo '404 Not Found: ' . $path;
     }
