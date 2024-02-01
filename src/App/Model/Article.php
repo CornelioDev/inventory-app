@@ -51,6 +51,14 @@ class Article extends BaseModel
         return $statement->rowCount() > 0;
     }
 
+    public function delete(int $id): bool
+    {
+        $query = 'DELETE FROM articles WHERE id = :id';
+        $bindings = [':id' => $id];
+        $statement = $this->executeQuery($query, $bindings);
+        return $statement->rowCount() > 0;
+    }
+
     public function getById(int $id): ?array
     {
         $query = 'SELECT * FROM articles WHERE id = :id';

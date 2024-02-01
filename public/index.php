@@ -48,6 +48,12 @@ $router->addRoute('POST', '/article/{id}/edit', function($matches){
     $articleController->update($id);
 });
 
+$router->addRoute('GET', '/article/{id}/delete', function($matches){
+    $id = $matches['id'];
+    $articleController = new ArticleController();
+    $articleController->delete($id);
+});
+
 // Request management
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);

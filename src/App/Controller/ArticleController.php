@@ -69,4 +69,15 @@ class ArticleController extends BaseController
             }
         }
     }
+
+    public function delete(string $id): void
+    {
+        $id = intval($id);
+
+        if ($this->articleModel->delete($id)) {
+            header('Location: /articles');
+        } else {
+            echo '<script>alert("Error: Cannot delete this article");</script>';
+        }
+    }
 }
