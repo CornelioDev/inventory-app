@@ -42,9 +42,10 @@ $router->addRoute('GET', '/article/{id}/edit', function($matches){
     $articleController->edit($id);
 });
 
-$router->addRoute('POST', '/article/update', function(){
+$router->addRoute('POST', '/article/{id}/edit', function($matches){
+    $id = $matches['id'];
     $articleController = new ArticleController();
-    $articleController->update();
+    $articleController->update($id);
 });
 
 // Request management
