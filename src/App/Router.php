@@ -10,9 +10,10 @@ class Router
 
     public function addRoute(string $method, string $path, callable $handler): void
     {
+        $pattern = '%^' . str_replace(['{', '}'], ['(?<', '>\w+)'], $path) . '$%';
         $this->routes[] = [
             'method' => $method,
-            'path' => $path,
+            'pattern' => $pattern,
             'handler' => $handler,
         ];
     }
@@ -20,9 +21,11 @@ class Router
     public function handleRequest(string $method, string $path): void
     {
         foreach ($this->routes as $route) {
-            if ($route['method'] === $method && $route['path'] === $path) {
+            if ($route['method'] === $method 
+            && preg_match($route['pattern'], $path, $matches)) 
+            {
                 $handler = $route['handler'];
-                $handler();
+                $handler($matches);
                 return;
             }
         }

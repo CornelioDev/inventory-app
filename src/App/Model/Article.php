@@ -38,7 +38,7 @@ class Article extends BaseModel
         return $statement->rowCount() > 0;
     }
 
-    public function update(int $id, string $name, string $description, float $price): void
+    public function update(int $id, string $name, string $description, float $price): bool
     {
         $query = 'UPDATE articles SET name = :name, description = :description, price = :price WHERE id = :id';
         $bindings = [
@@ -47,7 +47,8 @@ class Article extends BaseModel
             ':description' => $description, 
             ':price' => $price
         ];
-        $this->executeQuery($query, $bindings);
+        $statement = $this->executeQuery($query, $bindings);
+        return $statement->rowCount() > 0;
     }
 
     public function getById(int $id): ?array
