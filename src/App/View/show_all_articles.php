@@ -1,6 +1,6 @@
 <div class="md:w-6/12 mx-auto min-h-screen overflow-x-auto">
-<h1 class="text-center pt-10">All articles</h1>    
-<table class="table">
+    <h1 class="text-center pt-10">All articles</h1>
+    <table class="table">
         <!-- head -->
         <thead>
             <tr>
@@ -18,9 +18,14 @@
                             <td><?= $article['name'] ?></td>
                             <td><?= $article['description'] ?></td>
                             <td><?= $article['price'] ?></td>
-                            <td class="flex gap-5">
-                                <a href=<?='/article' . '/' . $article['id'] . '/edit'?>><ion-icon name="create-outline"></ion-icon></a>
-                                <a href=<?='/article' . '/' . $article['id'] . '/delete'?>><ion-icon name="trash-outline" class="text-error"></ion-icon></a>
+                            <td>
+                                <div class="dropdown dropdown-end">
+                                    <div tabindex="0" role="button" class="m-1"><ion-icon name="ellipsis-vertical-outline"></div>
+                                    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-24">
+                                        <a href=<?= '/article' . '/' . $article['id'] . '/edit' ?> class="hover:bg-base-300 p-2"><ion-icon name="create-outline"></ion-icon> Edit</a>
+                                        <a href=<?= '/article' . '/' . $article['id'] . '/delete' ?> class="hover:bg-base-300 p-2"><ion-icon name="trash-outline" class="text-error"></ion-icon> Delete</a>
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>
