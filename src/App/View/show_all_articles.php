@@ -7,6 +7,7 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -17,6 +18,10 @@
                             <td><?= $article['name'] ?></td>
                             <td><?= $article['description'] ?></td>
                             <td><?= $article['price'] ?></td>
+                            <td class="flex gap-5">
+                                <a href=<?='/article' . '/' . $article['id'] . '/edit'?>><ion-icon name="create-outline"></ion-icon></a>
+                                <a href=<?='/article' . '/' . $article['id'] . '/delete'?>><ion-icon name="trash-outline" class="text-error"></ion-icon></a>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </ul>
