@@ -73,6 +73,11 @@ $router->addRoute('POST', '/warehouse/new', function(){
     $warehouseController->store();
 });
 
+$router->addRoute('GET', '/warehouses', function(){
+    $warehouseController = new WarehouseController();
+    $warehouseController->showAll();
+});
+
 // Request management
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);

@@ -31,4 +31,11 @@ class Warehouse extends BaseModel
         $statement = $this->executeQuery($query, $bindings);
         return $statement->rowCount() > 0;
     }
+
+    public function getAll(): array
+    {
+        $query = 'SELECT * FROM warehouses';
+        $statement = $this->executeQuery($query);
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
