@@ -36,6 +36,12 @@ $router->addRoute('POST', '/article/new', function(){
     $articleController->create();
 });
 
+$router->addRoute('GET', '/article/{id}', function($matches){
+    $id = $matches['id'];
+    $articleController = new ArticleController();
+    $articleController->show($id);
+});
+
 $router->addRoute('GET', '/article/{id}/edit', function($matches){
     $id = $matches['id'];
     $articleController = new ArticleController();

@@ -59,7 +59,7 @@ class Article extends BaseModel
         return $statement->rowCount() > 0;
     }
 
-    public function getById(int $id): ?array
+    public function getById(int $id): array
     {
         $query = 'SELECT * FROM articles WHERE id = :id';
         $bindings = [':id' => $id];

@@ -18,6 +18,18 @@ class ArticleController extends BaseController
         $this->renderTemplate('new_article');
     }
 
+    public function show(string $id)
+    {
+        $id = intval($id);
+        $article = $this->articleModel->getById($id);
+        
+        if ($article) {
+            $this->renderTemplate('single_article', ['article' => $article]);
+        } else {
+            echo 'Article not found';
+        }
+    }
+
     public function showAll()
     {   
         $articles = $this->articleModel->getAll();
@@ -63,7 +75,7 @@ class ArticleController extends BaseController
             $price = floatval($price);
 
             if ($this->articleModel->update($id, $name, $description, $price)) {
-                header('Location: /articles');
+                header("Location: /article/{$id}");
             } else {
                 echo '<script>alert("Error: Cannot edit this article data");</script>';
             }
