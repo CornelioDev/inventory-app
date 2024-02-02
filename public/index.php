@@ -7,6 +7,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use App\Router;
 use App\Controller\HomeController;
 use App\Controller\ArticleController;
+use App\Controller\WarehouseController;
 use Dotenv\Dotenv;
 
 // Load .env
@@ -58,6 +59,18 @@ $router->addRoute('GET', '/article/{id}/delete', function($matches){
     $id = $matches['id'];
     $articleController = new ArticleController();
     $articleController->delete($id);
+});
+
+// WAREHOUSES ROUTES
+
+$router->addRoute('GET', '/warehouse/new', function(){
+    $warehouseController = new WarehouseController();
+    $warehouseController->create();
+});
+
+$router->addRoute('POST', '/warehouse/new', function(){
+    $warehouseController = new WarehouseController();
+    $warehouseController->store();
 });
 
 // Request management
