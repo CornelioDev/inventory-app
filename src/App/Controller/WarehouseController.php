@@ -40,4 +40,15 @@ class WarehouseController extends BaseController
         $warehouses = $this->warehouseModel->getAll();
         $this->renderTemplate('show_all_warehouses', ['warehouses' => $warehouses]);
     }
+
+    public function delete(string $id): void
+    {
+        $id = intval($id);
+        
+        if ($this->warehouseModel->delete($id)) {
+            header('Location: /warehouses');
+        } else {
+            echo '<script>alert("Error: Cannot delete this warehouse");</script>';
+        }
+    }
 }

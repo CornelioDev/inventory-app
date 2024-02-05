@@ -38,4 +38,12 @@ class Warehouse extends BaseModel
         $statement = $this->executeQuery($query);
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function delete(int $id): bool
+    {
+        $query = 'DELETE FROM warehouses WHERE id = :id';
+        $bindings = [':id' => $id];
+        $statement = $this->executeQuery($query, $bindings);
+        return $statement->rowCount() > 0;
+    }
 }

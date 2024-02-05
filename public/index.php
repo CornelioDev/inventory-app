@@ -78,6 +78,12 @@ $router->addRoute('GET', '/warehouses', function(){
     $warehouseController->showAll();
 });
 
+$router->addRoute('GET', '/warehouse/{id}/delete', function($matches){
+    $id = $matches['id'];
+    $warehouseController = new WarehouseController();
+    $warehouseController->delete($id);
+});
+
 // Request management
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
