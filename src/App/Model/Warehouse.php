@@ -54,4 +54,16 @@ class Warehouse extends BaseModel
         $statement = $this->executeQuery($query, $bindings);
         return $statement->rowCount() > 0;
     }
+
+    public function update(int $id, string $name, string $location): bool
+    {
+        $query = 'UPDATE warehouses SET name = :name, location = :location WHERE id = :id';
+        $bindings = [
+            ':id' => $id, 
+            ':name' => $name, 
+            ':location' => $location, 
+        ];
+        $statement = $this->executeQuery($query, $bindings);
+        return $statement->rowCount() > 0;
+    }
 }

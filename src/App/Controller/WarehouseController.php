@@ -63,4 +63,30 @@ class WarehouseController extends BaseController
             echo '<script>alert("Error: Cannot delete this warehouse");</script>';
         }
     }
+
+    public function edit(string $id)
+    {
+        $id = intval($id);
+        $warehouse = $this->warehouseModel->getById($id);
+        $this->renderTemplate('edit_warehouse_form', ['warehouse' => $warehouse]);
+    }
+
+    public function update(string $id){
+        if($_SERVER['REQUEST_METHOD'] === 'POST')
+        {
+            // Capture form data
+            $name = htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8');
+            $location = htmlspecialchars($_POST['location'], ENT_QUOTES, 'UTF-8');
+
+            $id = intval($id);
+
+            if ($this->warehouseModel->update($id, $name, $location)) {
+                header("Location: /warehouse/{$id}");
+            } else {
+                echo '<script>alert("Error: Cannot edit this warehouse data");</script>';
+            }
+        }
+    }
+
+
 }
