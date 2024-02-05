@@ -78,6 +78,12 @@ $router->addRoute('GET', '/warehouses', function(){
     $warehouseController->showAll();
 });
 
+$router->addRoute('GET', '/warehouse/{id}', function($matches){
+    $id = $matches['id'];
+    $warehouseController = new WarehouseController();
+    $warehouseController->show($id);
+});
+
 $router->addRoute('GET', '/warehouse/{id}/delete', function($matches){
     $id = $matches['id'];
     $warehouseController = new WarehouseController();

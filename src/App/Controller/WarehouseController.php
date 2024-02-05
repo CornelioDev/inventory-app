@@ -41,6 +41,18 @@ class WarehouseController extends BaseController
         $this->renderTemplate('show_all_warehouses', ['warehouses' => $warehouses]);
     }
 
+    public function show(string $id): void
+    {
+        $id = intval($id);
+        $warehouse = $this->warehouseModel->getById($id);
+
+        if ($warehouse) {
+            $this->renderTemplate('single_warehouse', ['warehouse' => $warehouse]);
+        } else {
+            echo 'Warehouse not found';
+        }
+    }
+
     public function delete(string $id): void
     {
         $id = intval($id);
