@@ -1,4 +1,4 @@
-<div class="md:w-6/12 mx-auto min-h-screen overflow-x-auto">
+<div class="md:w-6/12 mx-auto min-h-screen overflow-clip">
     <h1 class="text-center pt-10">All articles</h1>
     <table class="table">
         <!-- head -->
