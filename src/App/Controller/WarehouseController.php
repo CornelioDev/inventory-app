@@ -45,9 +45,10 @@ class WarehouseController extends BaseController
     {
         $id = intval($id);
         $warehouse = $this->warehouseModel->getById($id);
+        $articles = $this->warehouseModel->getArticlesByWarehouseId($id);
 
         if ($warehouse) {
-            $this->renderTemplate('single_warehouse', ['warehouse' => $warehouse]);
+            $this->renderTemplate('single_warehouse', ['warehouse' => $warehouse, 'articles' => $articles]);
         } else {
             echo 'Warehouse not found';
         }

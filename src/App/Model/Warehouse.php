@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace App\Model;
 
 use App\Database;
@@ -22,19 +23,22 @@ class Warehouse extends BaseModel
     {
         $query = 'INSERT INTO warehouses (name, location) 
         VALUES (:name, :location)';
-        
+
         $bindings = [
-            ':name' => $name, 
+            ':name' => $name,
             ':location' => $location,
         ];
-        
+
         $statement = $this->executeQuery($query, $bindings);
         return $statement->rowCount() > 0;
     }
 
     public function getAll(): array
     {
-        $query = 'SELECT * FROM warehouses';
+        $query = 'SELECT w.*, COUNT(wi.article_id) AS article_count 
+        FROM warehouses w LEFT JOIN warehouse_items wi 
+        ON w.id = wi.warehouse_id 
+        GROUP BY w.id';
         $statement = $this->executeQuery($query);
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -45,6 +49,20 @@ class Warehouse extends BaseModel
         $bindings = [':id' => $id];
         $statement = $this->executeQuery($query, $bindings);
         return $statement->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function getArticlesByWarehouseId(int $warehouseId): array
+    {
+        $query = 'SELECT articles.*, warehouse_items.quantity 
+              FROM articles 
+              JOIN warehouse_items ON articles.id = warehouse_items.article_id
+              WHERE warehouse_items.warehouse_id = :warehouse_id';
+
+        $bindings = [':warehouse_id' => $warehouseId];
+
+        $statement = $this->executeQuery($query, $bindings);
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function delete(int $id): bool
@@ -59,9 +77,9 @@ class Warehouse extends BaseModel
     {
         $query = 'UPDATE warehouses SET name = :name, location = :location WHERE id = :id';
         $bindings = [
-            ':id' => $id, 
-            ':name' => $name, 
-            ':location' => $location, 
+            ':id' => $id,
+            ':name' => $name,
+            ':location' => $location,
         ];
         $statement = $this->executeQuery($query, $bindings);
         return $statement->rowCount() > 0;

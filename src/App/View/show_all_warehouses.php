@@ -1,11 +1,15 @@
 <div class="md:w-6/12 mx-auto min-h-screen overflow-clip">
-    <h1 class="text-center pt-10">All articles</h1>
+    <div class="flex items-baseline justify-between mb-5">
+        <h1 class="text-center pt-10 block">All warehouses</h1>
+        <a href="/warehouse/new" class="btn btn-primary btn-xs">New Warehouse</a>
+    </div>
     <table class="table">
         <!-- head -->
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Location</th>
+                <th>Articles</th>
                 <th></th>
             </tr>
         </thead>
@@ -18,6 +22,7 @@
                                 <a href="<?= "/warehouse/{$warehouse['id']}" ?>"><?= $warehouse['name'] ?></a>
                             </td>
                             <td><?= $warehouse['location'] ?></td>
+                            <td class="text-center"><?= $warehouse['article_count'] ?></td>
                             <td>
                                 <div class="dropdown dropdown-end">
                                     <div tabindex="0" role="button" class="m-1"><ion-icon name="ellipsis-vertical-outline"></div>
