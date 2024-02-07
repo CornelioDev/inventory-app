@@ -58,17 +58,36 @@ class Article extends BaseModel
         return false;
     }
 
-    public function update(int $id, string $name, string $description, float $price): bool
+    public function update(int $id, string $name, string $description, float $price, int $warehouseItem, $warehouse, int $quantity): bool
     {
         $query = 'UPDATE articles SET name = :name, description = :description, price = :price WHERE id = :id';
+        
         $bindings = [
-            ':id' => $id, 
+            ':id' => $id,
             ':name' => $name, 
             ':description' => $description, 
             ':price' => $price
         ];
+        
         $statement = $this->executeQuery($query, $bindings);
-        return $statement->rowCount() > 0;
+        $statement->rowCount() > 0;
+
+        if ($statement) {
+           (empty($quantity)) ? $quantity = 1 : $quantity;
+           
+           $queryWarehouse = 'UPDATE warehouse_items SET warehouse_id = :warehouse_id, quantity = :quantity WHERE id = :warehouseItem_id';
+           
+           $bindingsWarehouse = [
+            ':warehouseItem_id' => $warehouseItem,
+            ':warehouse_id' => $warehouse,
+            ':quantity' => $quantity,
+           ];
+           
+           $statementWarehouse = $this->executeQuery($queryWarehouse, $bindingsWarehouse);
+           return $statementWarehouse->rowCount() > 0;
+        }
+
+        return false;
     }
 
     public function delete(int $id): bool

@@ -2,9 +2,15 @@
 declare(strict_types=1);
 
 namespace App\Model;
+use App\Database;
 
 class WarehouseItems extends BaseModel 
 {
+    public function __construct()
+    {
+        parent::__construct(new Database);
+    }
+
     public function create(int $articleId, int $warehouseId, int $quantity): bool
     {
         $query = 'INSERT INTO warehouses (article_id, warehouse_id, quantity) VALUES (:article_id, :warehouse_id, :quantity)';
@@ -26,12 +32,20 @@ class WarehouseItems extends BaseModel
         ];
         return $this->executeQuery($query, $bindings);
     }
-
-    public function update(int $id, int $quantity): bool
+    
+    public function getByArticle(int $articleId)
     {
-        $query = 'UPDATE warehouse_items SET quantity = :quantity WHERE id = :id';
+        $query = 'SELECT * FROM warehouse_items WHERE article_id = :article_id';
+        $bindings = [':article_id' => $articleId];
+        $statement = $this->executeQuery($query, $bindings);
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function updateQuantity(int $article_id, int $quantity): bool
+    {
+        $query = 'UPDATE warehouse_items SET quantity = :quantity WHERE article_id = :article_id';
         $bindings = [
-            ':id' => $id,
+            ':article_id' => $article_id,
             ':quantity' => $quantity,
         ];
         $statement = $this->executeQuery($query, $bindings);
