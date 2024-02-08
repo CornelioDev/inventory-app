@@ -1,8 +1,11 @@
-<!-- <pre>
-    <?= print_r($article, true) ?>
-    <?= print_r($warehouseItem, true) ?>
-    <?= print_r($warehouse, true) ?>
-</pre> -->
+<?php
+
+use Helpers\DateHelper;
+
+$createdDate = DateHelper::formatTimestamp($article['created_at']);
+$updatedDate = DateHelper::formatTimestamp($article['updated_at']);
+?>
+
 <div class="container mx-auto min-h-screen mt-20">
     <div class="flex justify-between">
         <figure id="article-image" class="w-10/12">
@@ -11,13 +14,13 @@
         <div id="article-details" class="pl-5">
             <p>Warehouse: <?= $article['warehouse_name'] ?></p>
             <p>Qty: <?= $article['quantity'] ?></p>
-            <div class="divider"></div> 
-            <p>Created: <?= $article['created_at'] ?></p>
-            <p>Updated: <?= $article['updated_at'] ?></p>
+            <div class="divider"></div>
+            <p class="text-xs">Created: <?= $createdDate ?></p>
+            <p class="text-xs">Updated: <?= $updatedDate ?></p>
 
             <div class="mt-5 w-min space-y-2">
                 <a href="<?= "/article/{$article['id']}/edit" ?>" class="btn btn-wide btn-sm"><ion-icon name="create"></ion-icon>Edit</a>
-                
+
                 <a href="<?= "/article/{$article['id']}/delete" ?>" class="btn btn-wide btn-sm hover:bg-red-100"><ion-icon name="trash"></ion-icon>Delete</a>
             </div>
         </div>
