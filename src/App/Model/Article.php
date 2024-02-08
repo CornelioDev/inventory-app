@@ -84,7 +84,8 @@ class Article extends BaseModel
             ];
 
             $statementWarehouse = $this->executeQuery($queryWarehouse, $bindingsWarehouse);
-            return $statementWarehouse->rowCount() > 0;
+            $statementWarehouse->rowCount() > 0;
+            return true;
         }
 
         return false;
