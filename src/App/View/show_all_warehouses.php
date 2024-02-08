@@ -1,5 +1,5 @@
 <div class="md:w-6/12 mx-auto min-h-screen overflow-clip">
-    <div class="flex items-baseline justify-between mb-5">
+    <div class="flex items-baseline justify-between mb-5 px-10">
         <h1 class="text-center pt-10 block">All warehouses</h1>
         <a href="/warehouse/new" class="btn btn-primary btn-xs">New Warehouse</a>
     </div>

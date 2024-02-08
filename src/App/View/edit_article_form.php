@@ -1,4 +1,4 @@
-<div class="container mx-auto w-2/6 h-screen mt-10">
+<div class="px-5 h-screen mt-10">
     <h1 class="text-center">Edit Article Data</h1>
     <form action="/article/<?= $article['id'] ?>/edit" method="post" class="flex flex-col gap-3 mt-5">
         <input type="hidden" name="warehouseItem" value="<?= $current_warehouse[0]['id'] ?>">

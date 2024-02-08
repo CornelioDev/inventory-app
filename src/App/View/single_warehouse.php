@@ -1,7 +1,8 @@
-<div class="container mx-auto min-h-screen mt-20">
-    <div class="flex justify-between">
-        <div id="warehouse-items" class="w-10/12">
-            <h1><?= $warehouse['name'] ?></h1>
+<div class="container mx-auto min-h-screen mt-5">
+    <div class="flex flex-col">
+        <div id="warehouse-items" class="">
+            <h1 class="text-center"><?= $warehouse['name'] ?></h1>
+            <p class="text-center">Location: <?= $warehouse['location'] ?></p>
             <table class="table">
                 <!-- head -->
                 <thead>
@@ -38,9 +39,7 @@
                 </tbody>
             </table>
         </div>
-        <div id="warehouse-details" class="pl-5">
-            <p>Location: <?= $warehouse['location'] ?></p>
-
+        <div id="warehouse-details" class="mt-5 flex gap-4 justify-center">
             <div class="mt-5 w-min space-y-2">
                 <a href="<?= "/warehouse/{$warehouse['id']}/edit" ?>" class="btn btn-wide btn-sm"><ion-icon name="create"></ion-icon>Edit</a>
                 <a href="<?= "/warehouse/{$warehouse['id']}/delete" ?>" class="btn btn-wide btn-sm hover:bg-red-100"><ion-icon name="trash"></ion-icon>Delete</a>

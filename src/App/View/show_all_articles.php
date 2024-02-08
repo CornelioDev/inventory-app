@@ -2,7 +2,7 @@
     <?= print_r($articles, true) ?>
 </pre> -->
 <div class="md:w-6/12 mx-auto min-h-screen overflow-clip">
-    <div class="flex items-baseline justify-between mb-5">
+    <div class="flex items-baseline justify-between mb-5 mx-10">
         <h1 class="text-center pt-10 block">All articles</h1>
         <a href="/article/new" class="btn btn-primary btn-xs">New Article</a>
     </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme='wireframe'>
+<html lang="en" data-theme='corporate'>
 
 <head>
     <meta charset="UTF-8">
@@ -41,6 +41,6 @@
             </ul>
         </div>
         <div class="navbar-end">
-            <a class="btn">Button</a>
+            <a class="btn btn-sm">Login</a>
         </div>
     </div>
